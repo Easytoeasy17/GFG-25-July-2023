@@ -1,0 +1,26 @@
+class Spiral
+{
+    List<List<Integer>> arr= new ArrayList<>();
+    
+    ArrayList<Integer> findSpiral(Node root) 
+    {
+        inorder(root,0);
+        ArrayList<Integer> ans=new ArrayList<Integer>();
+        for(int i=0; i<arr.size(); i++){
+            if(i%2==1) ans.addAll(arr.get(i));
+            else for(int j=arr.get(i).size()-1; j>=0; j--) ans.add(arr.get(i).get(j));
+            
+        }
+        return ans;
+        
+       
+    }
+    void inorder(Node root, int k){
+        if(root==null ) return;
+        if(arr.size()<=k) arr.add(new ArrayList<Integer>());
+        inorder(root.left, k+1);
+        arr.get(k).add(root.data);
+        inorder(root.right, k+1);
+    }
+}
+
